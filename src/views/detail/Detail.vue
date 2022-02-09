@@ -30,6 +30,7 @@
     </scroll>
     <detail-bottom-bar @addCart="addToCart"></detail-bottom-bar>
     <back-top @click.native="backClick" v-show="canTop"></back-top>
+    <!-- <toast :message="message" :show="show"></toast> -->
   </div>
 </template>
 <script>
@@ -43,6 +44,7 @@ import DetailCommentInfo from "./detailCpn/DetailCommentInfo.vue";
 import DetailBottomBar from "./detailCpn/DetailBottomBar.vue";
 
 import Scroll from "common/scroll/Scroll.vue";
+// import Toast from "common/toast/Toast.vue";
 import GoodsList from "components/content/goods/GoodsList.vue";
 import { backTopMinin } from "@/common/mixin.js";
 import {
@@ -66,6 +68,7 @@ export default {
     DetailCommentInfo,
     DetailBottomBar,
     Scroll,
+    // Toast,
     GoodsList,
   },
   mixins: [backTopMinin],
@@ -82,6 +85,8 @@ export default {
       themeTops: [],
       currentIndex: 0,
       getThemeY: null,
+      // message: "",
+      // show: false,
     };
   },
   created() {
@@ -168,7 +173,15 @@ export default {
       product.price = this.goods.realPrice;
       product.iid = this.iid;
       this.addCart(product).then((res) => {
-        console.log(res);
+        console.log(this.$toast);
+        // console.log(this.$toast.methods.show(res, 1000));
+        this.$toast.show(res, 1000);
+        // this.show = true;
+        // this.message = res;
+        // setTimeout(() => {
+        //   this.show = false;
+        //   this.message = "";
+        // }, 1000);
       });
       // this.$store.dispatch("addCart", product).then((res) => {
       //   console.log(res);
